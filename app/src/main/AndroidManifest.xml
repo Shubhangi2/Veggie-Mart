@@ -15,10 +15,12 @@
             android:exported="false" />
         <activity
             android:name=".registerActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.VeggiProjectlogo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

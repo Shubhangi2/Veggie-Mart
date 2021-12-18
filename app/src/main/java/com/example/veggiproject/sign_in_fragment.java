@@ -1,5 +1,7 @@
 package com.example.veggiproject;
 
+import static com.example.veggiproject.registerActivity.on_reset_password_fragment;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -122,6 +124,7 @@ public class sign_in_fragment extends Fragment {
         forgot_pwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                on_reset_password_fragment = true;
                 setFragment(new reset_password());
             }
         });
