@@ -26,6 +26,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.w3c.dom.Text;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link sign_in_fragment#newInstance} factory method to
@@ -40,6 +42,7 @@ public class sign_in_fragment extends Fragment {
 
     private Button sign_in;
     private ImageButton close;
+    private TextView forgot_pwd;
 
     private String email_Pattern = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+";
 
@@ -99,6 +102,8 @@ public class sign_in_fragment extends Fragment {
         sign_in = view.findViewById(R.id.sign_in_btn);
         close = view.findViewById(R.id.close_sign_in);
 
+        forgot_pwd = view.findViewById(R.id.forgot_pwd_sign_in);
+
         firebaseAuth = FirebaseAuth.getInstance();
         return view;
     }
@@ -113,6 +118,14 @@ public class sign_in_fragment extends Fragment {
                 setFragment(new sing_up_fragment());
             }
         });
+
+        forgot_pwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragment(new reset_password());
+            }
+        });
+
 
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
