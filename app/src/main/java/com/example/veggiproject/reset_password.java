@@ -7,6 +7,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +33,7 @@ public class reset_password extends Fragment {
     private TextView go_back;
     private Button reset_password_btn;
     private FrameLayout parentFrameLayout;
+    private FirebaseAuth firebaseAuth;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -76,6 +85,7 @@ public class reset_password extends Fragment {
         go_back = view.findViewById(R.id.go_back_fp);
         reset_password_btn = view.findViewById(R.id.reset_password_btn);
         parentFrameLayout = getActivity().findViewById(R.id.frameLayout);
+        firebaseAuth = FirebaseAuth.getInstance();
         return view;
     }
 
@@ -89,10 +99,54 @@ public class reset_password extends Fragment {
                 setFragment(new sign_in_fragment());
             }
         });
+
+        email_reset.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkinputs();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        reset_password_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reset_password_btn.setEnabled(false);
+                firebaseAuth.sendPasswordResetEmail(email_reset.getText().toString())
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(getActivity(), "Email sent successfully", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    String error = task.getException().getMessage();
+                                    Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                                }
+                                reset_password_btn.setEnabled(true);
+                            }
+                        });
+            }
+        });
     }
     private void setFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(parentFrameLayout.getId(), fragment);
         fragmentTransaction.commit();
+    }
+
+    private void checkinputs(){
+        if(!TextUtils.isEmpty(email_reset.getText())){
+            reset_password_btn.setEnabled(true);
+        }else{
+            reset_password_btn.setEnabled(false);
+        }
     }
 }
