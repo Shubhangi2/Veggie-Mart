@@ -28,4 +28,13 @@
         <item name="android:windowBackground">@drawable/splash_background_logo</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.VeggiProject.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.VeggiProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.VeggiProject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
