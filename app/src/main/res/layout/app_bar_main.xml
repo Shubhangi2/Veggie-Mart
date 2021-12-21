@@ -16,7 +16,14 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.VeggiProject.PopupOverlay" />
+            app:popupTheme="@style/Theme.VeggiProject.PopupOverlay">
+            <ImageView
+                android:id="@+id/main_app_bar_logo"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/veggie_mart_logo"
+                android:adjustViewBounds="true"/>
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
