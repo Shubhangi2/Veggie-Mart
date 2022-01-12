@@ -1,4 +1,4 @@
-package com.example.veggiproject.ui.home;
+package com.example.veggiproject;
 
 import android.os.Bundle;
 
@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.veggiproject.R;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 

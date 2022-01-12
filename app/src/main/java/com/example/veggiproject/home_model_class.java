@@ -1,4 +1,4 @@
-package com.example.veggiproject.ui.home;
+package com.example.veggiproject;
 
 public class home_model_class {
     String name, price, quantity, image;

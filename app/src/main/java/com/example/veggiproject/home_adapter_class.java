@@ -1,5 +1,6 @@
-package com.example.veggiproject.ui.home;
+package com.example.veggiproject;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.veggiproject.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
@@ -25,6 +25,14 @@ public class home_adapter_class extends FirebaseRecyclerAdapter<home_model_class
         holder.price.setText(model.getPrice());
         holder.quantity.setText(model.getQuantity());
         Glide.with(holder.image.getContext()).load(model.getImage()).into(holder.image);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), product_details_activity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @NonNull

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VeggiProject">
         <activity
+            android:name=".product_details_activity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:label="@string/title_activity_main"
@@ -32,4 +35,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
