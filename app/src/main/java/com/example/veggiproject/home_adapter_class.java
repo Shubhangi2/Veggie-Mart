@@ -30,6 +30,7 @@ public class home_adapter_class extends FirebaseRecyclerAdapter<home_model_class
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), product_details_activity.class);
+                intent.putExtra("vid", model.getVid());
                 v.getContext().startActivity(intent);
             }
         });

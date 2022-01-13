@@ -1,7 +1,20 @@
 package com.example.veggiproject;
 
 public class home_model_class {
-    String name, price, quantity, image;
+    String name;
+    String price;
+    String quantity;
+    String image;
+
+    public String getVid() {
+        return vid;
+    }
+
+    public void setVid(String vid) {
+        this.vid = vid;
+    }
+
+    String vid;
 
     public home_model_class(){
 
@@ -12,6 +25,7 @@ public class home_model_class {
         this.price = price;
         this.quantity = quantity;
         this.image = image;
+        this.vid = vid;
     }
 
     public String getName() {
