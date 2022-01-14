@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,14 +18,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+
 public class product_details_activity extends AppCompatActivity {
     private ImageView plus, minus;
     private TextView elegant_num;
     int total_quantity=1;
     private String vegetable_id = "";
 
+    private Button addToCartButton;
+
     private ImageView vimage;
     private TextView vname, vprice;
+
 
 
 
@@ -42,7 +50,17 @@ public class product_details_activity extends AppCompatActivity {
         vprice = findViewById(R.id.product_detail_price);
         vimage = findViewById(R.id.product_detail_img);
 
-        get_product_detail(vegetable_id);
+        addToCartButton = findViewById(R.id.product_detail_add_to_cart_btn);
+
+        addToCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adding_to_cartlist();
+            }
+        });
+
+
+        get_product_detail(vegetable_id); //called a method to show the details
 
         //clicklistener for elegant number button
         plus.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +107,31 @@ public class product_details_activity extends AppCompatActivity {
 
            }
        });
+
+
+    }
+
+    private void adding_to_cartlist(){
+
+        String save_current_date, save_current_time;
+        Calendar cal_for_date = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy");
+        save_current_date = currentDate.format(cal_for_date.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
+        save_current_time = currentTime.format(cal_for_date.getTime());
+        Toast.makeText(this, save_current_time+"  "+save_current_date, Toast.LENGTH_SHORT).show();
+
+        DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("cartList");
+        final HashMap<String, Object> cartMap = new HashMap<>();
+        cartMap.put("name",vname.getText().toString());
+        cartMap.put("price", vprice.getText().toString());
+        cartMap.put("date", save_current_date);
+        cartMap.put("time",save_current_time);
+        cartMap.put("quantity",elegant_num.getText().toString());
+        cartMap.put("vid", vegetable_id);
+
+        cartListRef.child("user view");
 
 
     }
