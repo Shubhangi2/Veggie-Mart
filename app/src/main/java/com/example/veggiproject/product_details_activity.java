@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -131,7 +133,29 @@ public class product_details_activity extends AppCompatActivity {
         cartMap.put("quantity",elegant_num.getText().toString());
         cartMap.put("vid", vegetable_id);
 
-        cartListRef.child("user view");
+        cartListRef.child("User view").child(vegetable_id)
+                .updateChildren(cartMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            cartListRef.child("Admin view").child(vegetable_id)
+                                    .updateChildren(cartMap)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(getApplicationContext(), "successful task", Toast.LENGTH_SHORT).show();
+                                            }else{
+                                                Toast.makeText(getApplicationContext(), "failed 2nd task", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                        }else{
+                            Toast.makeText(getApplicationContext(), "failed first task", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
 
     }
