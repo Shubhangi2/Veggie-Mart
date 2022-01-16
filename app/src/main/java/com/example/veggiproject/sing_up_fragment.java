@@ -1,5 +1,6 @@
 package com.example.veggiproject;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -51,6 +52,7 @@ public class sing_up_fragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private String email_Pattern = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+";
 
+    private ProgressDialog loading_bar;
     private FirebaseFirestore firebaseFirestore;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -108,6 +110,7 @@ public class sing_up_fragment extends Fragment {
 
         close = view.findViewById(R.id.close_sign_up);
         sign_up = view.findViewById(R.id.sign_up_btn);
+        loading_bar = new ProgressDialog(getContext());
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -242,6 +245,10 @@ public class sing_up_fragment extends Fragment {
             if(password.getText().toString().equals(confirm_password.getText().toString())){
 
                 sign_up.setEnabled(false);
+                loading_bar.setTitle("creating account");
+                loading_bar.setMessage("Please wait, while we are creating account");
+                loading_bar.setCanceledOnTouchOutside(false);
+                loading_bar.show();
 
                 firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -251,12 +258,17 @@ public class sing_up_fragment extends Fragment {
                                     Map<Object, String> userData = new HashMap<>();
                                     userData.put("Name", name.getText().toString());
 
+
+
+
                                     firebaseFirestore.collection("users")
                                             .add(userData)
                                             .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<DocumentReference> task) {
                                                     if(task.isSuccessful()){
+                                                        loading_bar.dismiss();
+                                                        Toast.makeText(getContext(), "Account created successfully", Toast.LENGTH_SHORT).show();
                                                        main_intent();
                                                     }else {
                                                         sign_up.setEnabled(true);

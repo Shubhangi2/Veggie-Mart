@@ -2,6 +2,7 @@ package com.example.veggiproject;
 
 import static com.example.veggiproject.registerActivity.on_reset_password_fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import android.text.Editable;
 import android.text.TextUtils;
@@ -49,6 +51,7 @@ public class sign_in_fragment extends Fragment {
     private String email_Pattern = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+";
 
     private FirebaseAuth firebaseAuth;
+    private ProgressDialog loading_bar;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -107,6 +110,7 @@ public class sign_in_fragment extends Fragment {
         forgot_pwd = view.findViewById(R.id.forgot_pwd_sign_in);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        loading_bar = new ProgressDialog(getContext());
         return view;
     }
 
@@ -198,11 +202,19 @@ public class sign_in_fragment extends Fragment {
         if(email.getText().toString().matches(email_Pattern)){
             if(password.length() >= 8){
                         sign_in.setEnabled(false);
+
+                        loading_bar.setTitle("signing into your account");
+                        loading_bar.setMessage("Please wait, while signing into your account");
+                        loading_bar.setCanceledOnTouchOutside(false);
+                        loading_bar.show();
+
                         firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if(task.isSuccessful()){
+                                            Toast.makeText(getContext(), "Signed in successfully", Toast.LENGTH_SHORT).show();
+                                            loading_bar.dismiss();
                                             main_intent();
                                         }
                                         else{
