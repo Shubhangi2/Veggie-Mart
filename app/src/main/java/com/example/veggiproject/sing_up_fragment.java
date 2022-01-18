@@ -28,6 +28,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -53,7 +58,12 @@ public class sing_up_fragment extends Fragment {
     private String email_Pattern = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+";
 
     private ProgressDialog loading_bar;
-    private FirebaseFirestore firebaseFirestore;
+//    private FirebaseFirestore firebaseFirestore;
+
+    private FirebaseDatabase firebaseDatabase;
+
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -113,8 +123,8 @@ public class sing_up_fragment extends Fragment {
         loading_bar = new ProgressDialog(getContext());
 
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseFirestore = FirebaseFirestore.getInstance();
-
+//        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
         return view;
     }
 
@@ -206,6 +216,7 @@ public class sing_up_fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 check_email_and_password();
+//                main_intent();
             }
         });
     }
@@ -255,28 +266,11 @@ public class sing_up_fragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Map<Object, String> userData = new HashMap<>();
-                                    userData.put("Name", name.getText().toString());
 
+                                    Toast.makeText(getContext(), "task successfull", Toast.LENGTH_SHORT).show();
+                                    loading_bar.dismiss();
+                                    store_data();
 
-
-
-                                    firebaseFirestore.collection("users")
-                                            .add(userData)
-                                            .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                    if(task.isSuccessful()){
-                                                        loading_bar.dismiss();
-                                                        Toast.makeText(getContext(), "Account created successfully", Toast.LENGTH_SHORT).show();
-                                                       main_intent();
-                                                    }else {
-                                                        sign_up.setEnabled(true);
-                                                        String error = task.getException().getMessage();
-                                                        Toast.makeText(getActivity(),error, Toast.LENGTH_SHORT).show();
-                                                    }
-                                                }
-                                            });
 
                                 }else{
                                     sign_up.setEnabled(true);
@@ -295,11 +289,34 @@ public class sing_up_fragment extends Fragment {
         }
     }
 
+    private void store_data(){
+        final DatabaseReference rootref;
+        rootref = FirebaseDatabase.getInstance().getReference();
+        HashMap<String, Object> userData = new HashMap<>();
+        userData.put("name",name.getText().toString());
+        userData.put("email",email.getText().toString());
+        userData.put("password", password.getText().toString());
+
+        rootref.child("Users").child(name.getText().toString()).updateChildren(userData)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        loading_bar.dismiss();
+                        if(task.isSuccessful()){
+                            main_intent();
+                            Toast.makeText(getContext(), "Account created successfully", Toast.LENGTH_SHORT).show();
+
+                        }else{
+                            main_intent();
+                            Toast.makeText(getContext(), "You get error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
     private void main_intent() {
         Intent main_intent = new Intent(getActivity(), MainActivity.class);
         startActivity(main_intent);
         getActivity().finish();
     }
-
-
     }
