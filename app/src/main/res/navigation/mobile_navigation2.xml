@@ -3,23 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation2"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_veggie_mart">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_veggie_mart"
         android:name="com.example.veggiproject.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.veggiproject.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_my_orders"
+        android:name="com.example.veggiproject.MyOrdersFragment"
+        android:label="My orders"
+        tools:layout="@layout/fragment_my_orders" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.veggiproject.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_my_cart"
+        android:name="com.example.veggiproject.MyCartFragment"
+        android:label="My cart"
+        tools:layout="@layout/fragment_my_cart" />
+
+    <fragment
+        android:id="@+id/nav_my_wishlist"
+        android:name="com.example.veggiproject.wishlistFragment"
+        android:label="My wishlist"
+        tools:layout="@layout/fragment_wishlist"/>
+
+    <fragment
+        android:id="@+id/nav_my_account"
+        android:name="com.example.veggiproject.MyAccount"
+        android:label="My account"
+        tools:layout="@layout/fragment_my_account"/>
+
 </navigation>
