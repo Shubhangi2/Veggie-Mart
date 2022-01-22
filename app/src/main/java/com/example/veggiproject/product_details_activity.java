@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,7 @@ public class product_details_activity extends AppCompatActivity {
 
     private ImageView vimage;
     private TextView vname, vprice;
+    private FirebaseAuth firebaseAuth;
 
 
 
@@ -51,6 +54,7 @@ public class product_details_activity extends AppCompatActivity {
         vname = findViewById(R.id.product_detail_name);
         vprice = findViewById(R.id.product_detail_price);
         vimage = findViewById(R.id.product_detail_img);
+        firebaseAuth = FirebaseAuth.getInstance();
 
         addToCartButton = findViewById(R.id.product_detail_add_to_cart_btn);
 
@@ -93,7 +97,7 @@ public class product_details_activity extends AppCompatActivity {
            @Override
            public void onDataChange(@NonNull DataSnapshot snapshot) {
                if(snapshot.exists()){
-                   Toast.makeText(getApplicationContext(), "yes snapshot exist", Toast.LENGTH_SHORT).show();
+//                   Toast.makeText(getApplicationContext(), "yes snapshot exist", Toast.LENGTH_SHORT).show();
                    home_model_class model_instance = snapshot.getValue(home_model_class.class);
                    vname.setText(model_instance.getName());
                    vprice.setText(model_instance.getPrice());
@@ -122,7 +126,7 @@ public class product_details_activity extends AppCompatActivity {
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
         save_current_time = currentTime.format(cal_for_date.getTime());
-        Toast.makeText(this, save_current_time+"  "+save_current_date, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, save_current_time+"  "+save_current_date, Toast.LENGTH_SHORT).show();
 
         DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("cartList");
         final HashMap<String, Object> cartMap = new HashMap<>();
@@ -133,13 +137,17 @@ public class product_details_activity extends AppCompatActivity {
         cartMap.put("quantity",elegant_num.getText().toString());
         cartMap.put("vid", vegetable_id);
 
-        cartListRef.child("User view").child(vegetable_id)
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentuser = firebaseUser.getUid();
+
+
+        cartListRef.child("User view").child(currentuser).child(vegetable_id)
                 .updateChildren(cartMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            cartListRef.child("Admin view").child(vegetable_id)
+                            cartListRef.child("Admin view").child(currentuser).child(vegetable_id)
                                     .updateChildren(cartMap)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
