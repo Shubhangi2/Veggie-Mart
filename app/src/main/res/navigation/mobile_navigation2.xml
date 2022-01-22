@@ -35,4 +35,10 @@
         android:label="My account"
         tools:layout="@layout/fragment_my_account"/>
 
+    <fragment
+        android:id="@+id/nav_sign_out"
+        android:name="com.example.veggiproject.signout_fragment"
+        android:label="sign out"
+        tools:layout="@layout/fragment_signout_fragment"/>
+
 </navigation>

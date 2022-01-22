@@ -123,5 +123,5 @@
         android:backgroundTint="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/close" />
+        app:srcCompat="@drawable/closee" />
 </androidx.constraintlayout.widget.ConstraintLayout>
