@@ -61,6 +61,7 @@ public class sing_up_fragment extends Fragment {
 //    private FirebaseFirestore firebaseFirestore;
 
     private FirebaseDatabase firebaseDatabase;
+    private EditText phone;
 
 
 
@@ -117,6 +118,7 @@ public class sing_up_fragment extends Fragment {
         email = view.findViewById(R.id.email_sign_up);
         password = view.findViewById(R.id.password_sign_up);
         confirm_password = view.findViewById(R.id.confirm_pwd_sign_up);
+        phone = view.findViewById(R.id.phone_sign_up);
 
         close = view.findViewById(R.id.close_sign_up);
         sign_up = view.findViewById(R.id.sign_up_btn);
@@ -296,8 +298,9 @@ public class sing_up_fragment extends Fragment {
         userData.put("name",name.getText().toString());
         userData.put("email",email.getText().toString());
         userData.put("password", password.getText().toString());
+        userData.put("phone",phone.getText().toString());
 
-        rootref.child("Users").child(name.getText().toString()).updateChildren(userData)
+        rootref.child("Users").child(phone.getText().toString()).updateChildren(userData)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
