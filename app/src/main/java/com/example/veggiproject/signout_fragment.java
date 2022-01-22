@@ -84,6 +84,7 @@ public class signout_fragment extends Fragment {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(v.getContext(), registerActivity.class);
                 v.getContext().startActivity(intent);
+                getActivity().finish();
             }
         });
 
@@ -93,6 +94,7 @@ public class signout_fragment extends Fragment {
 //                Toast.makeText(getContext(), "You clicked on no button", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
                 v.getContext().startActivity(intent);
+                getActivity().finish();
             }
         });
     }
