@@ -139,6 +139,7 @@ public class product_details_activity extends AppCompatActivity {
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String currentuser = firebaseUser.getUid();
+        Toast.makeText(getApplicationContext(), currentuser, Toast.LENGTH_SHORT).show();
 
 
         cartListRef.child("User view").child(currentuser).child(vegetable_id)

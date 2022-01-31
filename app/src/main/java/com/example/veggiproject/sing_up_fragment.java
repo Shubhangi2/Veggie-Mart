@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -300,7 +301,10 @@ public class sing_up_fragment extends Fragment {
         userData.put("password", password.getText().toString());
         userData.put("phone",phone.getText().toString());
 
-        rootref.child("Users").child(phone.getText().toString()).updateChildren(userData)
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUser = firebaseUser.getUid();
+
+        rootref.child("Users").child(currentUser).updateChildren(userData)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
