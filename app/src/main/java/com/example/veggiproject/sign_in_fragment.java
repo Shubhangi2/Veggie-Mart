@@ -53,7 +53,6 @@ public class sign_in_fragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private ProgressDialog loading_bar;
 
-    private TextView admin, not_admin;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
