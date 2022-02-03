@@ -12,12 +12,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MyCartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class MyCartFragment extends Fragment {
+    my_cart_adapter_class adapter;
     private RecyclerView recyclerView;
     private Button nxt_button;
     private TextView total_amount_txt;
@@ -75,6 +82,31 @@ public class MyCartFragment extends Fragment {
 
         nxt_button = view.findViewById(R.id.cart_next_button);
         total_amount_txt = view.findViewById(R.id.total_amount_txt);
+
+        DatabaseReference dbquery = FirebaseDatabase.getInstance().getReference().child("cartList");
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUser = firebaseUser.getUid();
+
+        FirebaseRecyclerOptions<cart_item_model_class> options =
+                new FirebaseRecyclerOptions.Builder<cart_item_model_class>()
+                        .setQuery(dbquery.child("User view").child(currentUser).child("products"), cart_item_model_class.class)
+                        .build();
+
+
+        adapter = new my_cart_adapter_class(options);
+        recyclerView.setAdapter(adapter);
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 }

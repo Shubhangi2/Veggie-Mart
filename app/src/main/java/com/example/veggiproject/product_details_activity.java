@@ -121,7 +121,7 @@ public class product_details_activity extends AppCompatActivity {
 
         String save_current_date, save_current_time;
         Calendar cal_for_date = Calendar.getInstance();
-        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
         save_current_date = currentDate.format(cal_for_date.getTime());
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
@@ -142,13 +142,13 @@ public class product_details_activity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), currentuser, Toast.LENGTH_SHORT).show();
 
 
-        cartListRef.child("User view").child(currentuser).child(vegetable_id)
+        cartListRef.child("User view").child(currentuser).child("products").child(vegetable_id)
                 .updateChildren(cartMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            cartListRef.child("Admin view").child(currentuser).child(vegetable_id)
+                            cartListRef.child("Admin view").child(currentuser).child("Products").child(vegetable_id)
                                     .updateChildren(cartMap)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

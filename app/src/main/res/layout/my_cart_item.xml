@@ -10,33 +10,33 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/cart_item_img"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/orange_gajar" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/cart_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginBottom="36dp"
             android:text="TextView"
-            app:layout_constraintBottom_toTopOf="@+id/textView8"
-            app:layout_constraintStart_toEndOf="@+id/imageView2" />
+            app:layout_constraintBottom_toTopOf="@+id/cart_item_price"
+            app:layout_constraintStart_toEndOf="@+id/cart_item_img" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/cart_item_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/cart_item_img"
             tools:layout_editor_absoluteY="65dp" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/cart_item_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -50,11 +50,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quantity :   "
-            app:layout_constraintEnd_toStartOf="@+id/textView10"
+            app:layout_constraintEnd_toStartOf="@+id/cart_item_quantity"
             tools:layout_editor_absoluteY="65dp" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/cart_item_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
