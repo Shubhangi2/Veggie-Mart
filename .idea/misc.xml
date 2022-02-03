@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Veggiproject/app/src/main/res/drawable/border_to_layout.xml" value="0.22239583333333332" />
+        <entry key="..\:/Veggiproject/app/src/main/res/drawable/ic_baseline_delete_outline_24.xml" value="0.22239583333333332" />
+        <entry key="..\:/Veggiproject/app/src/main/res/drawable/ic_delete_icon.xml" value="0.22239583333333332" />
         <entry key="..\:/Veggiproject/app/src/main/res/drawable/splash_background_logo.xml" value="0.22239583333333332" />
         <entry key="..\:/Veggiproject/app/src/main/res/drawable/white_border.xml" value="0.22239583333333332" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/activity_main.xml" value="0.20208333333333334" />
@@ -18,12 +20,12 @@
         <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_home_recyclerview_layout.xml" value="0.20208333333333334" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_my_cart.xml" value="0.264" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_reset_password.xml" value="0.20208333333333334" />
-        <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_sign_in_fragment.xml" value="0.2" />
+        <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_sign_in_fragment.xml" value="0.264" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_sign_up_fragment.xml" value="0.264" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_signout_fragment.xml" value="0.20208333333333334" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_sing_up_fragment.xml" value="0.264" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/home_adapter_layout.xml" value="0.20208333333333334" />
-        <entry key="..\:/Veggiproject/app/src/main/res/layout/my_cart_item.xml" value="0.20208333333333334" />
+        <entry key="..\:/Veggiproject/app/src/main/res/layout/my_cart_item.xml" value="0.4" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/nav_header_main.xml" value="0.2" />
         <entry key="..\:/Veggiproject/app/src/main/res/menu/activity_main_drawer.xml" value="0.4" />
         <entry key="..\:/Veggiproject/app/src/main/res/menu/main.xml" value="0.20208333333333334" />

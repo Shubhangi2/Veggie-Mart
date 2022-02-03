@@ -3,10 +3,14 @@ package com.example.veggiproject;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +18,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class MyCartFragment extends Fragment {
+    private RecyclerView recyclerView;
+    private Button nxt_button;
+    private TextView total_amount_txt;
+    private RecyclerView.LayoutManager layoutManager;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +67,14 @@ public class MyCartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_cart, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_cart, container, false);
+        recyclerView = view.findViewById(R.id.my_cart_recyclerview);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        nxt_button = view.findViewById(R.id.cart_next_button);
+        total_amount_txt = view.findViewById(R.id.total_amount_txt);
+        return view;
     }
 }
