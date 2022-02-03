@@ -3,17 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:elevation="8dp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="8dp"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:padding="5dp"
         android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/cart_item_img"
             android:layout_width="100dp"
+            android:layout_margin="5dp"
             android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/orange_gajar" />
 
         <TextView
@@ -21,19 +28,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="24dp"
             android:text="TextView"
             app:layout_constraintBottom_toTopOf="@+id/cart_item_price"
-            app:layout_constraintStart_toEndOf="@+id/cart_item_img" />
+            app:layout_constraintStart_toEndOf="@+id/cart_item_img"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.295" />
 
         <TextView
             android:id="@+id/cart_item_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginBottom="16dp"
             android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/cart_item_img"
-            tools:layout_editor_absoluteY="65dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cart_item_img" />
 
         <ImageView
             android:id="@+id/cart_item_delete"
@@ -49,9 +59,10 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:text="Quantity :   "
-            app:layout_constraintEnd_toStartOf="@+id/cart_item_quantity"
-            tools:layout_editor_absoluteY="65dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cart_item_quantity" />
 
         <TextView
             android:id="@+id/cart_item_quantity"
