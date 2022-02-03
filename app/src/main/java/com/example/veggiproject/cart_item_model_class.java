@@ -1,14 +1,23 @@
 package com.example.veggiproject;
 
 public class cart_item_model_class {
-        String name, price, quantity, vid;
+        String name, price, quantity, vid, image;
 
 
-    public cart_item_model_class(String name, String price, String quantity, String vid) {
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public cart_item_model_class(String name, String price, String quantity, String image, String vid) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.vid = vid;
+        this.image = image;
     }
     public cart_item_model_class(){
 

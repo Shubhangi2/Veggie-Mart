@@ -35,7 +35,7 @@ public class product_details_activity extends AppCompatActivity {
     private Button addToCartButton;
 
     private ImageView vimage;
-    private TextView vname, vprice;
+    private TextView vname, vprice, getImage_product_detail;
     private FirebaseAuth firebaseAuth;
 
 
@@ -54,6 +54,7 @@ public class product_details_activity extends AppCompatActivity {
         vname = findViewById(R.id.product_detail_name);
         vprice = findViewById(R.id.product_detail_price);
         vimage = findViewById(R.id.product_detail_img);
+        getImage_product_detail = findViewById(R.id.getImage_product_detail);
         firebaseAuth = FirebaseAuth.getInstance();
 
         addToCartButton = findViewById(R.id.product_detail_add_to_cart_btn);
@@ -102,6 +103,7 @@ public class product_details_activity extends AppCompatActivity {
                    vname.setText(model_instance.getName());
                    vprice.setText(model_instance.getPrice());
                    Glide.with(vimage.getContext()).load(model_instance.getImage()).into(vimage);
+                   getImage_product_detail.setText(model_instance.getImage());
                }
                else{
                    Toast.makeText(getApplicationContext(), "Data not fetched successfully", Toast.LENGTH_SHORT).show();
@@ -136,6 +138,7 @@ public class product_details_activity extends AppCompatActivity {
         cartMap.put("time",save_current_time);
         cartMap.put("quantity",elegant_num.getText().toString());
         cartMap.put("vid", vegetable_id);
+        cartMap.put("image",getImage_product_detail.getText().toString());
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String currentuser = firebaseUser.getUid();
