@@ -29,6 +29,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -216,7 +222,32 @@ public class sign_in_fragment extends Fragment {
                                         if(task.isSuccessful()){
                                             Toast.makeText(getContext(), "Signed in successfully", Toast.LENGTH_SHORT).show();
                                             loading_bar.dismiss();
-                                            main_intent();
+
+                                            DatabaseReference admin = FirebaseDatabase.getInstance().getReference().child("Admin");
+                                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                                            String currentUser = firebaseUser.getUid();
+
+                                            admin.child(currentUser).addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    if(snapshot.exists()){
+                                                        Intent intent = new Intent(getActivity(), adminActivity.class);
+                                                        startActivity(intent);
+                                                        getActivity().finish();
+
+                                                    }else{
+                                                        main_intent();
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                }
+                                            });
+
+
+
                                         }
                                         else{
                                             sign_in.setEnabled(true);

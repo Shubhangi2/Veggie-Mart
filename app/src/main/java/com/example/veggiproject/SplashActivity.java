@@ -1,5 +1,6 @@
 package com.example.veggiproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,6 +9,11 @@ import android.os.SystemClock;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SplashActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
@@ -33,9 +39,28 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(register_intent);
             finish();
         }else{
-            Intent main_intent = new Intent(SplashActivity.this, MainActivity.class);
-            startActivity(main_intent);
-            finish();
+
+            DatabaseReference dbref = FirebaseDatabase.getInstance().getReference().child("Admin");
+            String admin = currentUser.getUid();
+            dbref.child(admin).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        Intent intent = new Intent(SplashActivity.this, adminActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        Intent main_intent = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(main_intent);
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
     }
 }

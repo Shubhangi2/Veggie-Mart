@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Veggiproject/app/src/main/res/drawable/border_textview.xml" value="0.22239583333333332" />
         <entry key="..\:/Veggiproject/app/src/main/res/drawable/border_to_layout.xml" value="0.22239583333333332" />
         <entry key="..\:/Veggiproject/app/src/main/res/drawable/splash_background_logo.xml" value="0.22239583333333332" />
         <entry key="..\:/Veggiproject/app/src/main/res/drawable/white_border.xml" value="0.22239583333333332" />
+        <entry key="..\:/Veggiproject/app/src/main/res/layout/activity_admin.xml" value="0.2" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/activity_main.xml" value="0.20208333333333334" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/activity_product_details.xml" value="0.264" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/activity_register.xml" value="0.20208333333333334" />
+        <entry key="..\:/Veggiproject/app/src/main/res/layout/activity_signout_admin.xml" value="0.20208333333333334" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/activity_splash.xml" value="0.18489583333333334" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/app_bar_main.xml" value="0.20208333333333334" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/content_main.xml" value="0.20208333333333334" />
@@ -17,7 +20,7 @@
         <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_home_recyclerview_fragment.xml" value="0.18489583333333334" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_home_recyclerview_layout.xml" value="0.20208333333333334" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_reset_password.xml" value="0.20208333333333334" />
-        <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_sign_in_fragment.xml" value="0.2" />
+        <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_sign_in_fragment.xml" value="0.3770651117589893" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_sign_up_fragment.xml" value="0.264" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_signout_fragment.xml" value="0.20208333333333334" />
         <entry key="..\:/Veggiproject/app/src/main/res/layout/fragment_sing_up_fragment.xml" value="0.264" />
