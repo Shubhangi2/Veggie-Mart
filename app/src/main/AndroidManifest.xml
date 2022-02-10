@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VeggiProject">
         <activity
+            android:name=".AddItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".signout_admin"
             android:exported="false" />
         <activity

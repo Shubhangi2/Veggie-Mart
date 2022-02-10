@@ -23,7 +23,9 @@ public class adminActivity extends AppCompatActivity {
         addItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Ready to add new item", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Ready to add new item", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(adminActivity.this, AddItemActivity.class);
+                startActivity(intent);
             }
         });
 
