@@ -168,7 +168,5 @@ public class product_details_activity extends AppCompatActivity {
                         }
                     }
                 });
-
-
     }
 }
