@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VeggiProject">
         <activity
+            android:name=".confirm_final_order"
+            android:exported="false" />
+        <activity
             android:name=".AddItemActivity"
             android:exported="false" />
         <activity
