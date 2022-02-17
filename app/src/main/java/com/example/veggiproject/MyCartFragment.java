@@ -90,16 +90,16 @@ public class MyCartFragment extends Fragment {
         nxt_button = view.findViewById(R.id.cart_next_button);
         total_amount_txt = view.findViewById(R.id.total_amount_txt);
 
+        total_amount_txt.setText(String.valueOf(overallPrice));
+        Toast.makeText(getContext(), "total" + overallPrice, Toast.LENGTH_SHORT).show();
 
 
         nxt_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                total_amount_txt.setText(String.valueOf(overallPrice));
                 Intent intent = new Intent(getActivity(), confirm_final_order.class);
                 intent.putExtra("Total Price", String.valueOf(overallPrice));
                 startActivity(intent);
-                getActivity().finish();
             }
         });
 
@@ -111,6 +111,7 @@ public class MyCartFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
         DatabaseReference dbquery = FirebaseDatabase.getInstance().getReference().child("cartList");
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String currentUser = firebaseUser.getUid();
@@ -167,7 +168,6 @@ public class MyCartFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
         adapter.startListening();
-        total_amount_txt.setText(String.valueOf(overallPrice));
 
     }
 }
