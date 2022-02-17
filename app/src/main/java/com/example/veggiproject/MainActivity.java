@@ -1,12 +1,16 @@
 package com.example.veggiproject;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -49,6 +53,25 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.main_search_icon:
+                Toast.makeText(getApplicationContext(), "This is search icon", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.main_cart_icon:
+                Toast.makeText(getApplicationContext(), "This is cart icon", Toast.LENGTH_SHORT).show();
+
+                return true;
+                
+            case R.id.main_notification_icon:
+                Toast.makeText(getApplicationContext(), "This is notif", Toast.LENGTH_SHORT).show();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
