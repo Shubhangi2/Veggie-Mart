@@ -82,7 +82,10 @@ public class confirm_final_order extends AppCompatActivity {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String currentUser = firebaseUser.getUid();
         String currentUserEmail = firebaseUser.getEmail();
-        String order_id = "orderId " + saveCurrentDate + saveCurrentTime;
+//        String order_id = "orderId " + saveCurrentDate + saveCurrentTime;
+
+        String arr[] = currentUserEmail.split("@");
+        String order_id = arr[0];
 
         HashMap<String, Object> orderMap = new HashMap<>();
         orderMap.put("totalAmount", final_amount);
