@@ -136,32 +136,40 @@ public class confirm_final_order extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
-                                    order.child(currentUser).child(order_id).child("cart details")
+                                    order.child(currentUser).child(order_id).child("total product details")
                                             .updateChildren(map)
                                             .addOnCompleteListener(new OnCompleteListener() {
                                                 @Override
                                                 public void onComplete(@NonNull Task task) {
-                                                    if(task.isSuccessful()){
                                                         if(task.isSuccessful()){
-                                                            FirebaseDatabase.getInstance().getReference()
-                                                                    .child("cartList")
-                                                                    .child("User view")
-                                                                    .child(currentUser)
-                                                                    .removeValue()
-                                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                                                            DatabaseReference myOrder = FirebaseDatabase.getInstance().getReference().child("My Orders");
+                                                            myOrder.child(currentUser).updateChildren(map)
+                                                                    .addOnCompleteListener(new OnCompleteListener() {
                                                                         @Override
-                                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                                            if(task.isSuccessful()){
-                                                                                Toast.makeText(getApplicationContext(), "Your order received successfully", Toast.LENGTH_SHORT).show();
-                                                                                Intent intent = new Intent(confirm_final_order.this,MainActivity.class);
-                                                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                                                startActivity(intent);
-                                                                                finish();
-                                                                            }
+                                                                        public void onComplete(@NonNull Task task) {
+                                                                            FirebaseDatabase.getInstance().getReference()
+                                                                                    .child("cartList")
+                                                                                    .child("User view")
+                                                                                    .child(currentUser)
+                                                                                    .removeValue()
+                                                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                        @Override
+                                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                                            if(task.isSuccessful()){
+                                                                                                Toast.makeText(getApplicationContext(), "Your order received successfully", Toast.LENGTH_SHORT).show();
+                                                                                                Intent intent = new Intent(confirm_final_order.this,MainActivity.class);
+                                                                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                                                                startActivity(intent);
+                                                                                                finish();
+                                                                                            }
+                                                                                        }
+                                                                                    });
                                                                         }
                                                                     });
+
+
                                                         }
-                                                    }
                                                 }
                                             });
                                 }else{

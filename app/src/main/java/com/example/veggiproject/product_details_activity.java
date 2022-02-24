@@ -138,6 +138,7 @@ public class product_details_activity extends AppCompatActivity {
         cartMap.put("time",save_current_time);
         cartMap.put("quantity",elegant_num.getText().toString());
         cartMap.put("vid", vegetable_id);
+        cartMap.put("status", "not shipped");
         cartMap.put("image",getImage_product_detail.getText().toString());
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
