@@ -236,6 +236,8 @@ public class sing_up_fragment extends Fragment {
             if(!TextUtils.isEmpty(email.getText())){
                 if(!TextUtils.isEmpty(password.getText()) && password.length() >= 8){
                     if(!TextUtils.isEmpty(confirm_password.getText())){
+
+
                         sign_up.setEnabled(true);
                     }else{
                         sign_up.setEnabled(false);
