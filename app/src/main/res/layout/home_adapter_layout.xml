@@ -23,7 +23,7 @@
 
 
             <ImageView
-                android:id="@+id/home_adp_img"
+                android:id="@+id/home_adp_img1"
                 android:layout_width="350dp"
                 android:layout_height="170dp"
                 android:layout_weight="1"
@@ -36,7 +36,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/home_adp_name"
+                    android:id="@+id/home_adp_price11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
@@ -47,7 +47,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/home_adp_price"
+                    android:id="@+id/home_adp_price1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
@@ -57,7 +57,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/home_adp_quantity"
+                    android:id="@+id/home_adp_quantity1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
