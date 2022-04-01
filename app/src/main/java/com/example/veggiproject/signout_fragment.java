@@ -1,5 +1,7 @@
 package com.example.veggiproject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -21,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
  * create an instance of this fragment.
  */
 public class signout_fragment extends Fragment {
-    private Button yes, no;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,8 +70,6 @@ public class signout_fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_signout_fragment, container, false);
-        yes = view.findViewById(R.id.sign_out_yes_btn);
-        no = view.findViewById(R.id.sign_out_no_btn);
         return view;
     }
 
@@ -77,25 +77,50 @@ public class signout_fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "You signed out successfully", Toast.LENGTH_SHORT).show();
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(v.getContext(), registerActivity.class);
-                v.getContext().startActivity(intent);
-                getActivity().finish();
-            }
-        });
+        new AlertDialog.Builder(view.getContext())
+                .setMessage("Are you sure you really want to sign out from this account.")
+                .setCancelable(false)
+                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext(), "You signed out successfully", Toast.LENGTH_SHORT).show();
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent = new Intent(getContext(), registerActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
 
-        no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Toast.makeText(getContext(), "You clicked on no button", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
-                v.getContext().startActivity(intent);
-                getActivity().finish();
-            }
-        });
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                })
+                .show();
+
+
+//        yes.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(), "You signed out successfully", Toast.LENGTH_SHORT).show();
+//                FirebaseAuth.getInstance().signOut();
+//                Intent intent = new Intent(v.getContext(), registerActivity.class);
+//                v.getContext().startActivity(intent);
+//                getActivity().finish();
+//            }
+//        });
+//
+//        no.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Toast.makeText(getContext(), "You clicked on no button", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(v.getContext(), MainActivity.class);
+//                v.getContext().startActivity(intent);
+//                getActivity().finish();
+//            }
+//        });
     }
 }
