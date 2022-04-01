@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_veggie_mart, R.id.nav_my_orders, R.id.nav_my_cart, R.id.nav_my_wishlist, R.id.nav_my_account, R.id.nav_sign_out)
+                R.id.nav_veggie_mart, R.id.nav_my_orders, R.id.nav_my_cart, R.id.nav_my_wishlist, R.id.nav_sign_out)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -95,12 +95,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

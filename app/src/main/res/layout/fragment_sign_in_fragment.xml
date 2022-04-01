@@ -15,9 +15,8 @@
             android:id="@+id/imageView3"
             android:layout_width="264dp"
             android:layout_height="99dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="52dp"
             android:src="@drawable/logoname"
-            app:layout_constraintBottom_toTopOf="@+id/email_sign_in"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,14 +39,14 @@
 
         <EditText
             android:id="@+id/password_sign_in"
-            android:layout_width="379dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/email_sign_in"
+            app:layout_constraintStart_toStartOf="@+id/email_sign_in"
             app:layout_constraintTop_toBottomOf="@+id/email_sign_in" />
 
         <Button
