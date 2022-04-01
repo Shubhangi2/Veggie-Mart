@@ -13,21 +13,27 @@
         android:theme="@style/Theme.VeggiProject">
         <activity
             android:name=".confirm_final_order"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".AddItemActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".signout_admin"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".adminActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".product_details_activity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.VeggiProject.NoActionBar" />

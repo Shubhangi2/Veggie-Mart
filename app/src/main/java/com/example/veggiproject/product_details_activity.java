@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Vector;
 
 public class product_details_activity extends AppCompatActivity {
     private ImageView plus, minus;
@@ -37,6 +38,8 @@ public class product_details_activity extends AppCompatActivity {
     private ImageView vimage;
     private TextView vname, vprice, getImage_product_detail;
     private FirebaseAuth firebaseAuth;
+    private ImageView black_fav, red_fav;
+    private String quantity, image;
 
 
 
@@ -59,6 +62,28 @@ public class product_details_activity extends AppCompatActivity {
 
         addToCartButton = findViewById(R.id.product_detail_add_to_cart_btn);
 
+        black_fav = findViewById(R.id.black_favourite);
+        red_fav = findViewById(R.id.red_favourite);
+
+        black_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                black_fav.setVisibility(View.GONE);
+                red_fav.setVisibility(View.VISIBLE);
+                add_to_favourites();
+            }
+        });
+
+        red_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                black_fav.setVisibility(View.VISIBLE);
+                red_fav.setVisibility(View.GONE);
+                remove_from_favorites();
+            }
+        });
+
+
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +93,7 @@ public class product_details_activity extends AppCompatActivity {
 
 
         get_product_detail(vegetable_id); //called a method to show the details
+        set_default_favourite_icon(vegetable_id);
 
         //clicklistener for elegant number button
         plus.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +130,8 @@ public class product_details_activity extends AppCompatActivity {
                    vprice.setText(model_instance.getPrice());
                    Glide.with(vimage.getContext()).load(model_instance.getImage()).into(vimage);
                    getImage_product_detail.setText(model_instance.getImage());
+                  quantity = model_instance.getQuantity();
+                  image = model_instance.getImage();
                }
                else{
                    Toast.makeText(getApplicationContext(), "Data not fetched successfully", Toast.LENGTH_SHORT).show();
@@ -167,6 +195,85 @@ public class product_details_activity extends AppCompatActivity {
                         }else{
                             Toast.makeText(getApplicationContext(), "failed first task", Toast.LENGTH_SHORT).show();
                         }
+                    }
+                });
+    }
+    
+    
+    private void add_to_favourites(){
+//        Toast.makeText(this, "Data added to favourites", Toast.LENGTH_SHORT).show();
+
+        DatabaseReference favourites = FirebaseDatabase.getInstance().getReference().child("favourites");
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUser = firebaseUser.getUid();
+
+
+        HashMap<String, Object> favMap = new HashMap<>();
+        favMap.put("name", vname.getText().toString());
+        favMap.put("price", vprice.getText().toString());
+        favMap.put("quantity", quantity);
+        favMap.put("vid", vegetable_id);
+        favMap.put("image", image);
+
+        favourites.child(currentUser).child(vegetable_id)
+                .updateChildren(favMap)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(product_details_activity.this, "favourites add database", Toast.LENGTH_SHORT).show();
+                        }else{
+                            String error = task.getException().toString();
+                            Toast.makeText(product_details_activity.this, error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
+    
+    
+    private void remove_from_favorites(){
+//        Toast.makeText(this, "Data removed from favourtes", Toast.LENGTH_SHORT).show();
+
+        DatabaseReference rem_favourite = FirebaseDatabase.getInstance().getReference().child("favourites");
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUser = firebaseUser.getUid();
+
+        rem_favourite.child(currentUser).child(vegetable_id)
+                .removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(product_details_activity.this, "removed from favourites", Toast.LENGTH_SHORT).show();
+                        }else{
+                            String error = task.getException().toString();
+                            Toast.makeText(product_details_activity.this, error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        
+    }
+
+    private void set_default_favourite_icon(String veg_id){
+        DatabaseReference checkFav = FirebaseDatabase.getInstance().getReference().child("favourites");
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUser = firebaseUser.getUid();
+
+        checkFav.child(currentUser).child(vegetable_id)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            red_fav.setVisibility(View.VISIBLE);
+                        }else{
+                            black_fav.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
     }
