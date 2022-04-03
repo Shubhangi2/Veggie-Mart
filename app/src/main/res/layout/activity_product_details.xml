@@ -46,18 +46,18 @@
 
         <ImageView
             android:id="@+id/black_favourite"
-            android:layout_width="37dp"
-            android:layout_height="37dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="right"
             android:layout_margin="2dp"
             app:srcCompat="@drawable/black_favourite" />
 
         <ImageView
             android:id="@+id/red_favourite"
-            android:layout_width="37dp"
+            android:layout_width="30dp"
             android:layout_margin="2dp"
             android:visibility="gone"
-            android:layout_height="37dp"
+            android:layout_height="30dp"
             android:layout_gravity="right"
             app:srcCompat="@drawable/red_favourite" />
     </androidx.cardview.widget.CardView>
